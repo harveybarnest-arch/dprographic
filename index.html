@@ -9,6 +9,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
@@ -96,7 +98,6 @@
             align-items: center;
         }
 
-        /* Jika logo gambar belum ada, styling text fallback */
         .logo span { color: var(--primary); }
 
         .logo img {
@@ -204,48 +205,71 @@
 
         .service-card h3 { margin-bottom: 15px; font-size: 1.5rem; }
 
-        /* --- GALLERY --- */
+        /* --- GALLERY SLIDESHOW (SWIPER) --- */
         .gallery {
             padding: 100px 0;
             background-color: #0b0c0f;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
+        /* Styling container Swiper */
+        .gallery-slider {
+            width: 100%;
+            padding-bottom: 50px; /* Ruang untuk pagination dots dibawah */
         }
 
-        .gallery-item {
+        .swiper-slide {
             position: relative;
-            height: 300px;
+            /* Tinggi tetap agar rapi */
+            height: 400px; 
+            border-radius: 15px;
             overflow: hidden;
-            border-radius: 10px;
-            cursor: pointer;
+            cursor: grab;
         }
-
-        .gallery-item img {
+        
+        .swiper-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Gambar mengisi area tanpa gepeng */
             transition: transform 0.5s ease;
         }
+        
+        /* Efek zoom saat di-hover (hanya di desktop) */
+        @media (min-width: 1024px) {
+             .swiper-slide:hover img { transform: scale(1.1); }
+        }
 
-        .gallery-item:hover img { transform: scale(1.1); }
-
-        .overlay {
+        /* Overlay Text pada Slide */
+        .slide-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s;
+            padding: 30px 20px 20px;
         }
         
-        .overlay h4 { color: var(--primary); font-size: 1.2rem; }
-        .overlay p { color: #ccc; font-size: 0.9rem; }
+        .slide-overlay h4 { 
+            color: var(--primary); 
+            font-size: 1.4rem; 
+            margin-bottom: 5px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .slide-overlay p { color: #ddd; font-size: 0.95rem; }
 
-        .gallery-item:hover .overlay { transform: translateY(0); }
+        /* Kustomisasi Navigasi Swiper agar sesuai tema */
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary) !important; /* Warna panah Neon */
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        
+        .swiper-pagination-bullet {
+            background: var(--text-gray);
+            opacity: 0.5;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--secondary) !important; /* Dot aktif warna Pink */
+            opacity: 1;
+        }
+
 
         /* --- WHY US --- */
         .why-us {
@@ -323,6 +347,7 @@
             .hero-content h1 { font-size: 2rem; }
             .nav-links { display: none; } /* Simplified for mobile */
             .logo img { height: 40px; }
+            .swiper-slide { height: 300px; } /* Tinggi slide di HP lebih kecil */
         }
     </style>
 </head>
@@ -346,10 +371,10 @@
 
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h1>Upgrade Tampilan Mobilmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
-            <p>Spesialis Decal Custom, Cutting Sticker, dan Wrapping Mobil di Malang. Desain eksklusif, bahan premium, pemasangan rapi.</p>
+            <h1>Upgrade Tampilan Kendaraanmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
+            <p>Spesialis Decal Custom, Cutting Sticker, dan Wrapping untuk segala jenis kendaraan. Desain eksklusif, bahan premium, pemasangan rapi di Malang.</p>
             <div style="margin-top: 30px;">
-                <a href="#gallery" class="btn-cta" style="background: transparent; border: 2px solid var(--primary); margin-right: 10px;">Lihat Hasil Karya</a>
+                <a href="#gallery" class="btn-cta" style="background: transparent; border: 2px solid var(--primary); margin-right: 10px;">Lihat Galeri</a>
                 <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20tertarik%20dengan%20jasa%20decalnya" class="btn-cta" target="_blank">Konsultasi WA <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
@@ -380,18 +405,18 @@
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">Layanan <span class="highlight">Dprographic</span></h2>
-            <p class="section-subtitle">Apapun gayamu, kami siap mewujudkannya</p>
+            <p class="section-subtitle">Solusi decal untuk semua kebutuhan kendaraan</p>
 
             <div class="services-grid">
                 <div class="service-card">
                     <div class="icon-box"><i class="fas fa-car-side"></i></div>
                     <h3>Full Body Wrapping</h3>
-                    <p>Ubah warna total mobil Anda tanpa merusak cat asli. Tersedia warna matte, gloss, satin, hingga chrome mewah.</p>
+                    <p>Ubah warna total kendaraan Anda tanpa merusak cat asli. Tersedia warna matte, gloss, satin, hingga chrome mewah.</p>
                 </div>
                 <div class="service-card">
                     <div class="icon-box"><i class="fas fa-paint-brush"></i></div>
                     <h3>Custom Decal Printing</h3>
-                    <p>Desain grafis racing, itasha, atau branding kantor. Dicetak High-Res dengan laminasi anti pudar.</p>
+                    <p>Desain grafis racing, livery tim, atau branding niaga. Dicetak High-Res dengan laminasi anti pudar.</p>
                 </div>
                 <div class="service-card">
                     <div class="icon-box"><i class="fas fa-cut"></i></div>
@@ -404,43 +429,69 @@
 
     <section id="gallery" class="gallery">
         <div class="container">
-            <h2 class="section-title">Galeri <span class="highlight-pink">Inspirasi</span></h2>
-            <p class="section-subtitle">Contoh gaya decal yang bisa kami kerjakan</p>
+            <h2 class="section-title">Galeri <span class="highlight-pink">Karya</span></h2>
+            <p class="section-subtitle">Geser untuk melihat berbagai jenis kendaraan yang kami kerjakan</p>
 
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" alt="Racing Decal">
-                    <div class="overlay">
-                        <h4>Racing Style</h4>
-                        <p>Tampilan sport agresif</p>
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1600712242685-6216954037a0?auto=format&fit=crop&q=80&w=800" alt="Sedan Drift Decal">
+                        <div class="slide-overlay">
+                            <h4>Sedan Racing Style</h4>
+                            <p>Decal full body bertema drift/JDM yang agresif.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800" alt="Car Wrap Matte">
-                    <div class="overlay">
-                        <h4>Matte Full Wrap</h4>
-                        <p>Elegan dan Misterius</p>
+                    
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1586043797923-3c0930564843?auto=format&fit=crop&q=80&w=800" alt="Branding Mobil Box">
+                        <div class="slide-overlay">
+                            <h4>Branding Kendaraan Niaga</h4>
+                            <p>Solusi stiker promosi untuk mobil box atau operasional kantor.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=800" alt="Sporty Decal">
-                    <div class="overlay">
-                        <h4>Custom Livery</h4>
-                        <p>Desain Kompleks & Detail</p>
+
+                     <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800" alt="Jeep Wrangler Decal">
+                        <div class="slide-overlay">
+                            <h4>Jeep & 4x4 Offroad</h4>
+                            <p>Stiker lumpur atau grafis tangguh untuk medan berat.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600712242685-6216954037a0?auto=format&fit=crop&q=80&w=800" alt="Drift Livery">
-                    <div class="overlay">
-                        <h4>JDM / Drift Style</h4>
-                        <p>Penuh warna dan berani</p>
+
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1575540325855-4b5d285a3fa9?auto=format&fit=crop&q=80&w=800" alt="Motor Trail Decal">
+                        <div class="slide-overlay">
+                            <h4>Motor Trail / Motocross</h4>
+                            <p>Decal kit full set dengan bahan ekstra tebal dan kuat.</p>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800" alt="Livery Bus">
+                        <div class="slide-overlay">
+                            <h4>Livery Bus & Elf</h4>
+                            <p>Desain grafis skala besar untuk armada pariwisata.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1519245659620-e859806a8d3b?auto=format&fit=crop&q=80&w=800" alt="Adventure Truck Decal">
+                        <div class="slide-overlay">
+                            <h4>Adventure & Overland</h4>
+                            <p>Wrapping warna alam atau stiker peta ekspedisi.</p>
+                        </div>
+                    </div>
+
+                </div> <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
+
             
-            <div style="text-align: center; margin-top: 40px;">
-                <p style="margin-bottom: 20px; color: #888;">Ingin lihat hasil kerja Dprographic lainnya?</p>
-                <a href="https://wa.me/6281333317288?text=Boleh%20lihat%20portofolio%20decal%20asli%20Dprographic?" class="btn-cta" style="font-size: 0.9rem;">Minta Foto Portofolio Asli via WA</a>
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="margin-bottom: 20px; color: #888;">Punya kendaraan jenis lain? Kami siap berdiskusi.</p>
+                <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20bisa%20pasang%20decal%20untuk%20kendaraan%20saya?" class="btn-cta" style="font-size: 0.9rem;">Konsultasi Kendaraan Anda</a>
             </div>
         </div>
     </section>
@@ -469,6 +520,39 @@
     <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20tanya%20harga%20decal" class="float-wa" target="_blank" title="Hubungi Kami di WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".gallery-slider", {
+            slidesPerView: 1, // Tampilan di HP: 1 gambar
+            spaceBetween: 20, // Jarak antar slide
+            loop: true, // Bisa digeser terus berputar
+            autoplay: {
+                delay: 3500, // Geser otomatis tiap 3.5 detik
+                disableOnInteraction: false, // Tetap autoplay meski habis disentuh
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            // Pengaturan Responsif (Tampilan di Tablet & PC)
+            breakpoints: {
+                768: {
+                    slidesPerView: 2, // Tablet: 2 gambar
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 3, // Desktop: 3 gambar
+                    spaceBetween: 30,
+                },
+            },
+        });
+    </script>
 
 </body>
 </html>
