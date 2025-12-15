@@ -39,7 +39,6 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* Kelas Warna */
         .txt-cyan { color: var(--cyan); }
         .txt-pink { color: var(--pink); }
         .txt-yellow { color: var(--yellow); }
@@ -65,51 +64,85 @@
         .highlight { color: var(--cyan); }
         .highlight-pink { color: var(--pink); }
 
-        /* --- NAVBAR (UPDATED FOR MOBILE BURGER) --- */
+        /* --- NAVBAR --- */
         header {
-            background-color: rgba(15, 16, 20, 0.95);
+            background-color: rgba(15, 16, 20, 0.98); /* Hampir solid agar menu dropdown bagus */
             padding: 15px 0;
             position: fixed;
             width: 100%; top: 0; z-index: 1000;
             border-bottom: 2px solid var(--pink);
-            backdrop-filter: blur(10px);
         }
 
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
 
         .logo {
             font-size: 1.5rem; font-weight: 800; letter-spacing: 1px; color: white;
-            display: flex; align-items: center; z-index: 1001; /* Supaya logo tetap di atas menu mobile */
+            display: flex; align-items: center; z-index: 1001;
         }
         .logo span { color: var(--cyan); }
         .logo img { height: 50px; width: auto; margin-right: 10px; }
 
-        /* Menu Desktop Default */
+        /* --- MENU DESKTOP --- */
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { font-weight: 600; transition: color 0.3s; text-transform: uppercase; font-size: 0.9rem; }
         .nav-links a:hover { color: var(--cyan); }
 
-        .btn-cta {
+        /* PENTING: Tombol Pesan di dalam menu, default-nya HIDDEN di Desktop */
+        .mobile-only-btn { display: none; }
+
+        /* Tombol Pesan di luar menu (untuk Desktop) */
+        .desktop-only-btn {
             background: linear-gradient(45deg, var(--pink), #ff4d88);
             color: white; padding: 10px 25px; border-radius: 50px;
             font-weight: 700; transition: transform 0.3s, box-shadow 0.3s;
             border: none; cursor: pointer; display: inline-block;
         }
-        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); }
+        .desktop-only-btn:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); }
 
         /* HAMBURGER MENU ICON (Hidden on Desktop) */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            z-index: 1002;
-        }
+        .hamburger { display: none; cursor: pointer; z-index: 1002; }
         .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            transition: all 0.3s ease-in-out;
-            background-color: white;
+            display: block; width: 25px; height: 3px; margin: 5px auto;
+            transition: all 0.3s ease-in-out; background-color: white;
+        }
+
+        /* --- RESPONSIVE HEADER & DROPDOWN --- */
+        @media (max-width: 768px) {
+            .hamburger { display: block; margin-left: auto; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            /* Sembunyikan tombol Desktop */
+            .desktop-only-btn { display: none; }
+
+            /* Tampilkan tombol Mobile */
+            .mobile-only-btn { 
+                display: inline-block; 
+                background: var(--pink); color: white; padding: 10px 30px; 
+                border-radius: 5px; margin-top: 20px;
+            }
+
+            /* DROPDOWN MENU LOGIC */
+            .nav-links {
+                position: absolute;
+                top: -500px; /* Sembunyi di atas layar */
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background-color: rgba(15, 16, 20, 0.98); /* Background Gelap Solid */
+                padding: 30px 0;
+                transition: top 0.4s ease-in-out; /* Animasi Turun Halus */
+                border-bottom: 2px solid var(--cyan); /* Aksen bawah */
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                z-index: 999; /* Di bawah header bar */
+            }
+
+            .nav-links.active {
+                top: 100%; /* Turun tepat di bawah header */
+            }
+
+            .nav-links a { margin: 15px 0; font-size: 1.1rem; }
         }
 
         /* --- HERO SLIDESHOW SECTION --- */
@@ -215,39 +248,26 @@
         .slide-overlay h4 { color: var(--cyan); font-size: 1.4rem; margin-bottom: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .slide-overlay p { color: #ddd; font-size: 0.95rem; }
 
-        /* --- TESTIMONIALS (NEW SECTION) --- */
+        /* --- TESTIMONIALS --- */
         .testimonials {
             padding: 100px 0;
             background: linear-gradient(to bottom, #0f1014, #16181d);
         }
         .testimonial-card {
-            background: #1f222b;
-            padding: 30px;
-            border-radius: 15px;
-            border-bottom: 4px solid var(--cyan);
-            height: 100%; /* Agar tinggi sama */
+            background: #1f222b; padding: 30px; border-radius: 15px;
+            border-bottom: 4px solid var(--cyan); height: 100%;
         }
-        .client-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+        .client-info { display: flex; align-items: center; margin-bottom: 20px; }
         .client-avatar {
-            width: 50px; height: 50px;
-            background: #333;
-            border-radius: 50%;
+            width: 50px; height: 50px; background: #333; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--cyan);
-            margin-right: 15px;
+            font-size: 1.5rem; color: var(--cyan); margin-right: 15px;
         }
         .client-details h4 { font-size: 1.1rem; color: white; margin-bottom: 2px; }
         .client-details span { font-size: 0.85rem; color: #888; }
-        .testimonial-text {
-            color: #ccc; font-style: italic; font-size: 0.95rem; line-height: 1.6;
-        }
+        .testimonial-text { color: #ccc; font-style: italic; font-size: 0.95rem; line-height: 1.6; }
         .rating { color: var(--yellow); margin-bottom: 15px; font-size: 0.9rem; }
 
-        /* Navigasi Swiper Umum */
         .swiper-button-next, .swiper-button-prev { color: var(--cyan) !important; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
         .swiper-pagination-bullet { background: var(--text-gray); opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--pink) !important; opacity: 1; }
@@ -290,32 +310,13 @@
         }
         .float-wa:hover { transform: scale(1.1); }
 
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- RESPONSIVE MOBILE TWEAKS --- */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2rem; }
             .logo img { height: 40px; }
             .swiper-slide-gallery { height: 300px; }
 
-            /* Styles Menu Mobile (Burger) */
-            .hamburger { display: block; margin-left: auto; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-            .nav-links {
-                position: fixed; left: -100%; top: 70px; /* Di bawah header */
-                gap: 0; flex-direction: column; background-color: #0f1014;
-                width: 100%; text-align: center; transition: 0.3s;
-                border-bottom: 2px solid var(--pink);
-                padding: 20px 0;
-            }
-            .nav-links.active { left: 0; }
-            .nav-links a { margin: 15px 0; display: block; }
-            
-            /* Sembunyikan Tombol "Pesan Sekarang" di Header Mobile agar tidak gemuk */
-            .header-btn { display: none; }
-            
-            /* Footer Center di HP */
+            /* Footer Responsive */
             .footer-grid { text-align: center; }
             .footer-brand .logo { justify-content: center; }
             .footer-title::after { left: 50%; transform: translateX(-50%); }
@@ -339,10 +340,11 @@
                 <a href="#gallery">Galeri</a>
                 <a href="#testimonials">Testimoni</a>
                 <a href="#contact">Kontak</a>
-                <a href="https://wa.me/6281333317288" style="color: var(--pink);" class="mobile-only-link">Pesan Sekarang</a>
+                
+                <a href="https://wa.me/6281333317288" class="mobile-only-btn">Pesan Sekarang</a>
             </nav>
             
-            <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20konsultasi%20decal%20mobil" class="btn-cta header-btn" target="_blank">Pesan Sekarang</a>
+            <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20konsultasi%20decal%20mobil" class="desktop-only-btn" target="_blank">Pesan Sekarang</a>
 
             <div class="hamburger">
                 <span class="bar"></span>
@@ -636,7 +638,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- 1. SCRIPT MENU BURGER MOBILE ---
+        // --- 1. SCRIPT MENU BURGER MOBILE (DROPDOWN) ---
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-links");
 
