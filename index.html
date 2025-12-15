@@ -14,14 +14,11 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            /* Palet Warna Sticker */
             --cyan: #00F0FF; 
             --pink: #FF0055; 
             --yellow: #FFE600; 
             --green: #00FF99; 
             --orange: #FF8800; 
-            
-            /* Background Modern */
             --dark-bg: #0f1014;
             --card-bg: rgba(255, 255, 255, 0.05);
             --text-light: #ffffff;
@@ -42,12 +39,10 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* Kelas Warna untuk Teks */
+        /* Kelas Warna */
         .txt-cyan { color: var(--cyan); }
         .txt-pink { color: var(--pink); }
         .txt-yellow { color: var(--yellow); }
-        .txt-green { color: var(--green); }
-        .txt-orange { color: var(--orange); }
 
         /* --- UTILITY CLASSES --- */
         .container {
@@ -70,7 +65,7 @@
         .highlight { color: var(--cyan); }
         .highlight-pink { color: var(--pink); }
 
-        /* --- NAVBAR --- */
+        /* --- NAVBAR (UPDATED FOR MOBILE BURGER) --- */
         header {
             background-color: rgba(15, 16, 20, 0.95);
             padding: 15px 0;
@@ -84,12 +79,13 @@
 
         .logo {
             font-size: 1.5rem; font-weight: 800; letter-spacing: 1px; color: white;
-            display: flex; align-items: center;
+            display: flex; align-items: center; z-index: 1001; /* Supaya logo tetap di atas menu mobile */
         }
         .logo span { color: var(--cyan); }
         .logo img { height: 50px; width: auto; margin-right: 10px; }
 
-        .nav-links { display: flex; gap: 30px; }
+        /* Menu Desktop Default */
+        .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { font-weight: 600; transition: color 0.3s; text-transform: uppercase; font-size: 0.9rem; }
         .nav-links a:hover { color: var(--cyan); }
 
@@ -100,6 +96,21 @@
             border: none; cursor: pointer; display: inline-block;
         }
         .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); }
+
+        /* HAMBURGER MENU ICON (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1002;
+        }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+        }
 
         /* --- HERO SLIDESHOW SECTION --- */
         .hero-slider { width: 100%; height: 100vh; }
@@ -140,47 +151,30 @@
         .why-us {
             padding: 100px 0;
             background: radial-gradient(circle at top right, #1b2845 0%, #101014 100%);
-            position: relative;
-            border-top: 1px solid #333;
+            position: relative; border-top: 1px solid #333;
         }
         .why-us::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: radial-gradient(#333 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.2;
-            pointer-events: none;
+            background-size: 20px 20px; opacity: 0.2; pointer-events: none;
         }
         .why-us-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; margin-top: 50px;
         }
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px; position: relative; overflow: hidden; transition: all 0.4s ease;
+            backdrop-filter: blur(10px); border-radius: 15px;
         }
         .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--cyan);
-            box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
+            transform: translateY(-10px); background: rgba(255, 255, 255, 0.08);
+            border-color: var(--cyan); box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
         }
         .feature-icon-wrapper {
-            width: 70px; height: 70px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 25px;
-            font-size: 2rem;
-            transition: 0.4s;
+            width: 70px; height: 70px; background: rgba(0, 0, 0, 0.3); border-radius: 15px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 25px;
+            font-size: 2rem; transition: 0.4s;
         }
         .card-1 .feature-icon-wrapper i { color: var(--yellow); }
         .card-2 .feature-icon-wrapper i { color: var(--cyan); }
@@ -221,99 +215,72 @@
         .slide-overlay h4 { color: var(--cyan); font-size: 1.4rem; margin-bottom: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .slide-overlay p { color: #ddd; font-size: 0.95rem; }
 
+        /* --- TESTIMONIALS (NEW SECTION) --- */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, #0f1014, #16181d);
+        }
+        .testimonial-card {
+            background: #1f222b;
+            padding: 30px;
+            border-radius: 15px;
+            border-bottom: 4px solid var(--cyan);
+            height: 100%; /* Agar tinggi sama */
+        }
+        .client-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .client-avatar {
+            width: 50px; height: 50px;
+            background: #333;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--cyan);
+            margin-right: 15px;
+        }
+        .client-details h4 { font-size: 1.1rem; color: white; margin-bottom: 2px; }
+        .client-details span { font-size: 0.85rem; color: #888; }
+        .testimonial-text {
+            color: #ccc; font-style: italic; font-size: 0.95rem; line-height: 1.6;
+        }
+        .rating { color: var(--yellow); margin-bottom: 15px; font-size: 0.9rem; }
+
+        /* Navigasi Swiper Umum */
         .swiper-button-next, .swiper-button-prev { color: var(--cyan) !important; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
         .swiper-pagination-bullet { background: var(--text-gray); opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--pink) !important; opacity: 1; }
 
-        /* --- FOOTER (NEW 3 COLUMN STYLE) --- */
+        /* --- FOOTER --- */
         footer {
-            background-color: #08090b;
-            padding: 80px 0 20px;
-            border-top: 3px solid var(--cyan);
-            color: #ddd;
+            background-color: #08090b; padding: 80px 0 20px;
+            border-top: 3px solid var(--cyan); color: #ddd;
         }
-
         .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
-            text-align: left; /* Rata kiri agar rapi */
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px; margin-bottom: 60px; text-align: left;
         }
-
-        /* Kolom 1: Brand */
-        .footer-brand .logo {
-            justify-content: flex-start; /* Logo rata kiri */
-            margin-bottom: 20px;
-        }
-        .footer-brand p {
-            font-size: 0.95rem;
-            color: #aaa;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* Kolom 2: Kontak */
+        .footer-brand .logo { justify-content: flex-start; margin-bottom: 20px; }
+        .footer-brand p { font-size: 0.95rem; color: #aaa; line-height: 1.8; margin-bottom: 20px; }
         .footer-title {
-            font-size: 1.3rem;
-            color: white;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 10px;
+            font-size: 1.3rem; color: white; margin-bottom: 25px; position: relative; padding-bottom: 10px;
         }
         .footer-title::after {
-            content: '';
-            position: absolute;
-            left: 0; bottom: 0;
-            width: 50px; height: 3px;
-            background: var(--pink);
+            content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background: var(--pink);
         }
-
-        .contact-list li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        .contact-list i {
-            color: var(--cyan);
-            margin-right: 15px;
-            margin-top: 5px; /* Alignment dengan teks */
-            font-size: 1.1rem;
-        }
-
-        /* Kolom 3: Sosmed */
-        .social-links-footer {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
+        .contact-list li { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 0.95rem; }
+        .contact-list i { color: var(--cyan); margin-right: 15px; margin-top: 5px; font-size: 1.1rem; }
+        .social-links-footer { display: flex; gap: 15px; margin-top: 20px; }
         .social-links-footer a {
-            width: 45px; height: 45px;
-            background: #222;
-            border-radius: 50%;
+            width: 45px; height: 45px; background: #222; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            transition: 0.3s;
-            border: 1px solid #333;
+            color: white; font-size: 1.2rem; transition: 0.3s; border: 1px solid #333;
         }
-        .social-links-footer a:hover {
-            background: var(--cyan);
-            color: black;
-            transform: translateY(-5px);
-        }
-
+        .social-links-footer a:hover { background: var(--cyan); color: black; transform: translateY(-5px); }
         .quick-links li { margin-bottom: 10px; }
         .quick-links a:hover { color: var(--cyan); margin-left: 5px; transition: 0.3s; }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #222;
-            font-size: 0.85rem;
-            color: #666;
-        }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid #222; font-size: 0.85rem; color: #666; }
 
         /* --- FLOATING WA --- */
         .float-wa {
@@ -323,13 +290,32 @@
         }
         .float-wa:hover { transform: scale(1.1); }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2rem; }
-            .nav-links { display: none; }
             .logo img { height: 40px; }
             .swiper-slide-gallery { height: 300px; }
-            /* Footer Responsive */
+
+            /* Styles Menu Mobile (Burger) */
+            .hamburger { display: block; margin-left: auto; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .nav-links {
+                position: fixed; left: -100%; top: 70px; /* Di bawah header */
+                gap: 0; flex-direction: column; background-color: #0f1014;
+                width: 100%; text-align: center; transition: 0.3s;
+                border-bottom: 2px solid var(--pink);
+                padding: 20px 0;
+            }
+            .nav-links.active { left: 0; }
+            .nav-links a { margin: 15px 0; display: block; }
+            
+            /* Sembunyikan Tombol "Pesan Sekarang" di Header Mobile agar tidak gemuk */
+            .header-btn { display: none; }
+            
+            /* Footer Center di HP */
             .footer-grid { text-align: center; }
             .footer-brand .logo { justify-content: center; }
             .footer-title::after { left: 50%; transform: translateX(-50%); }
@@ -346,13 +332,23 @@
                 <img src="images/logo-dprographic.webp" alt="Dprographic" onerror="this.style.display='none'">
                 D<span>PRO</span>GRAPHIC
             </div>
+
             <nav class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#services">Layanan</a>
                 <a href="#gallery">Galeri</a>
+                <a href="#testimonials">Testimoni</a>
                 <a href="#contact">Kontak</a>
+                <a href="https://wa.me/6281333317288" style="color: var(--pink);" class="mobile-only-link">Pesan Sekarang</a>
             </nav>
-            <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20konsultasi%20decal%20mobil" class="btn-cta" target="_blank">Pesan Sekarang</a>
+            
+            <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20konsultasi%20decal%20mobil" class="btn-cta header-btn" target="_blank">Pesan Sekarang</a>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
     </header>
 
@@ -488,6 +484,99 @@
         </div>
     </section>
 
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Apa Kata <span class="highlight">Mereka?</span></h2>
+            <p class="section-subtitle">Testimoni nyata dari pelanggan Dprographic</p>
+
+            <div class="swiper testimonial-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Budi Santoso</h4><span>Komunitas NMAX Malang</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Hasil decal rapi banget, sambungannya hampir gak kelihatan. Warna neon-nya juga nyala pas malam. Mantap Dprographic!"</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Juragan Buah Batu</h4><span>Pick-up L300</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Branding mobil pickup saya jadi keren. Desainnya sesuai request, proses cepat. Sekarang mobil operasional jadi lebih bonafit."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Arif Wicaksono</h4><span>CRF 150 Owner</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Pesen decal tebal buat trail, udah dipake trabas berkali-kali tetep awet. Lemnya kuat gak gampang ngelupas kena lumpur."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Sari Travel</h4><span>Toyota Hiace</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Pelayanan ramah, desain revisi sampe cocok. Hiace saya jadi kelihatan mewah buat bawa tamu wisata."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Doni Racing</h4><span>Honda Jazz GK5</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Wrapping full body warna Satin Grey. Hasilnya smooth banget kayak cat asli. Recommended buat anak mobil Malang!"</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>CV. Maju Jaya</h4><span>Grandmax Blindvan</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Pesan stiker cutting buat logo perusahaan di 5 mobil, pengerjaan cepat dan seragam semua. Terima kasih."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Rian</h4><span>Vespa Sprint</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Pasang stiker transparan (PPF) buat ngelindungin cat vespa. Pemasangan detail banget sampe ke lekukan susah."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Pak Eko</h4><span>Pajero Sport</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Chrome delete (stiker hitam) di grill dan list kaca. Mobil jadi kelihatan lebih gagah. Harga bersahabat."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Toko Bunga Indah</h4><span>Suzuki Carry</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Desain bunga-bunganya cerah, cetakannya bagus gak burem. Pelanggan jadi gampang ngenalin mobil saya."</p>
+                    </div>
+                    <div class="swiper-slide testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar"><i class="fas fa-user"></i></div>
+                            <div class="client-details"><h4>Komunitas 4x4 Batu</h4><span>Hilux Double Cabin</span></div>
+                        </div>
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="testimonial-text">"Decal lumpur tema offroad-nya garang. Tahan goresan ranting pas masuk hutan. Sukses terus Dprographic."</p>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
     <footer id="contact">
         <div class="container">
             <div class="footer-grid">
@@ -499,7 +588,7 @@
                     </div>
                     <p>
                         Spesialis jasa Decal, Cutting Sticker, dan Wrapping Mobil Premium di Kota Batu & Malang. 
-                        Kami berkomitmen memberikan hasil terbaik dengan bahan berkualitas untuk kepuasan tampilan kendaraan Anda.
+                        Kami berkomitmen memberikan hasil terbaik dengan bahan berkualitas.
                     </p>
                 </div>
 
@@ -547,6 +636,23 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
+        // --- 1. SCRIPT MENU BURGER MOBILE ---
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Tutup menu saat link diklik
+        document.querySelectorAll(".nav-links a").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+
+
+        // --- 2. HERO SLIDER ---
         var heroSwiper = new Swiper(".hero-slider", {
             spaceBetween: 0,
             effect: "fade", 
@@ -557,6 +663,7 @@
             navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
         });
 
+        // --- 3. GALLERY SLIDER ---
         var gallerySwiper = new Swiper(".gallery-slider", {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -564,6 +671,19 @@
             autoplay: { delay: 3500, disableOnInteraction: false },
             pagination: { el: ".swiper-pagination", clickable: true },
             navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            breakpoints: {
+                768: { slidesPerView: 2, spaceBetween: 25 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+            },
+        });
+
+        // --- 4. TESTIMONIAL SLIDER ---
+        var testimonialSwiper = new Swiper(".testimonial-slider", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
             breakpoints: {
                 768: { slidesPerView: 2, spaceBetween: 25 },
                 1024: { slidesPerView: 3, spaceBetween: 30 },
