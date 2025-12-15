@@ -377,13 +377,18 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // 1. PENGATURAN HERO SLIDER (FADE EFFECT)
+        // 1. PENGATURAN HERO SLIDER (FASTER FADE)
+        // Perubahan ada di bagian 'speed' dan 'fadeEffect'
         var heroSwiper = new Swiper(".hero-slider", {
             spaceBetween: 0,
-            effect: "fade", // Efek pudar agar lebih mewah
+            effect: "fade",
+            speed: 1000, // Durasi perpindahan 1 detik (lebih cepat dan tegas)
+            fadeEffect: {
+                crossFade: true // Slide baru muncul tepat di atas slide lama (menghindari efek 'hantu' lambat hilang)
+            },
             loop: true,
             autoplay: {
-                delay: 4000, // Ganti slide tiap 4 detik
+                delay: 5000, // Waktu tunggu sebelum ganti slide (5 detik)
                 disableOnInteraction: false,
             },
             navigation: {
