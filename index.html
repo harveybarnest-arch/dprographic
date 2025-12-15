@@ -75,7 +75,6 @@
             display: flex; align-items: center;
         }
         .logo span { color: var(--primary); }
-        /* UPDATE PATH LOGO */
         .logo img { height: 50px; width: auto; margin-right: 10px; }
 
         .nav-links { display: flex; gap: 30px; }
@@ -122,7 +121,7 @@
             top: 0; left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Sedikit lebih terang agar decal terlihat */
+            background: rgba(0, 0, 0, 0.5);
             z-index: 2;
         }
 
@@ -155,8 +154,109 @@
 
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+        /* --- WHY US (UPDATED MODERN BOX STYLE) --- */
+        .why-us {
+            padding: 100px 0;
+            background: #131419;
+            position: relative;
+        }
+
+        /* Grid Layout untuk Kartu */
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* Desain Kartu Kotak Modern */
+        .feature-card {
+            background: rgba(26, 28, 35, 0.6);
+            border: 1px solid #333;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Efek Hover Keren (Border Menyala) */
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.2);
+            background: rgba(26, 28, 35, 1);
+        }
+
+        /* Dekorasi Sudut (Corner) ala Cyberpunk */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 3px;
+            background: var(--primary);
+            transition: width 0.4s ease;
+        }
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 0; height: 3px;
+            background: var(--secondary);
+            transition: width 0.4s ease;
+        }
+
+        .feature-card:hover::before,
+        .feature-card:hover::after {
+            width: 100%; /* Garis memanjang saat hover */
+        }
+
+        /* Ikon di dalam kartu */
+        .feature-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: #252830;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            border: 1px solid #444;
+            transition: 0.4s;
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: rotate(10deg);
+        }
+
+        .feature-icon-wrapper i {
+            font-size: 2rem;
+            color: var(--primary);
+            transition: 0.4s;
+        }
+
+        .feature-card:hover .feature-icon-wrapper i {
+            color: black; /* Ikon jadi hitam saat background cyan */
+        }
+
+        /* Teks dalam kartu */
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.7;
+        }
+
         /* --- SERVICES --- */
-        .services { padding: 100px 0; }
+        .services { padding: 100px 0; background: var(--dark-bg); }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .service-card {
             background: var(--card-bg); padding: 40px; border-radius: 15px; text-align: center;
@@ -190,15 +290,6 @@
         .swiper-button-next, .swiper-button-prev { color: var(--primary) !important; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
         .swiper-pagination-bullet { background: var(--text-gray); opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--secondary) !important; opacity: 1; }
-
-        /* --- WHY US --- */
-        .why-us {
-            padding: 80px 0; background: linear-gradient(135deg, #1a1c23 0%, #0f1014 100%);
-            text-align: center; border-top: 1px solid #333; border-bottom: 1px solid #333;
-        }
-        .features-wrapper { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
-        .feature-box { flex: 1; min-width: 200px; }
-        .feature-box h4 { color: white; margin-top: 15px; font-weight: 600; font-size: 1.2rem; }
 
         /* --- FOOTER --- */
         footer { background-color: #000; padding: 60px 0 30px; border-top: 2px solid var(--accent); text-align: center; }
@@ -250,7 +341,6 @@
             <div class="swiper-slide hero-slide">
                 <img src="images/sedan-decal.webp" class="hero-bg-img" alt="Decal Mobil Sedan Sport">
                 <div class="hero-overlay-layer"></div>
-                
                 <div class="container hero-content">
                     <h1>Upgrade Tampilan Kendaraanmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
                     <p>Spesialis Decal Custom, Cutting Sticker, dan Wrapping di Malang. Jadikan mobilmu pusat perhatian di jalanan!</p>
@@ -264,7 +354,6 @@
             <div class="swiper-slide hero-slide">
                 <img src="images/pickup-decal.webp" class="hero-bg-img" alt="Branding Mobil Pickup">
                 <div class="hero-overlay-layer"></div>
-
                 <div class="container hero-content">
                     <h1>Branding Mobil Operasional<br><span class="highlight-pink">Tingkatkan Citra</span> Bisnis Anda</h1>
                     <p>Ubah kendaraan niaga menjadi media promosi berjalan yang efektif. Desain profesional untuk Grandmax, Elf, hingga Truk.</p>
@@ -277,7 +366,6 @@
             <div class="swiper-slide hero-slide">
                 <img src="images/decab-decal.webp" class="hero-bg-img" alt="Decal Double Cabin 4x4">
                 <div class="hero-overlay-layer"></div>
-
                 <div class="container hero-content">
                     <h1>Lindungi Cat Asli Mobil<br>Dengan <span class="highlight">Wrapping Premium</span></h1>
                     <p>Siap untuk medan berat. Jaga nilai jual kembali mobil Anda dengan perlindungan maksimal dan tampilan gagah.</p>
@@ -294,29 +382,50 @@
 
     <section class="why-us">
         <div class="container">
-            <div class="features-wrapper">
-                <div class="feature-box">
-                    <i class="fas fa-gem" style="color: var(--secondary); font-size: 2.5rem;"></i>
-                    <h4>Bahan Premium</h4>
-                    <p style="font-size: 0.9rem; color: #888;">Vinyl Grade A+ & Tahan Cuaca</p>
+            <h2 class="section-title">Mengapa <span class="highlight">Dprographic?</span></h2>
+            <p class="section-subtitle">Kualitas & detail adalah prioritas utama kami</p>
+
+            <div class="why-us-grid">
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Material Premium</h3>
+                    <p>Kami hanya menggunakan vinyl *Automotive Grade* (seperti Orajet, Maxdecal, 3M) yang memiliki daya rekat kuat namun aman bagi cat asli saat dilepas kembali.</p>
                 </div>
-                <div class="feature-box">
-                    <i class="fas fa-palette" style="color: var(--accent); font-size: 2.5rem;"></i>
-                    <h4>Desain Custom</h4>
-                    <p style="font-size: 0.9rem; color: #888;">Revisi Sampai Cocok</p>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3>Cetak High-Res</h3>
+                    <p>Didukung mesin cetak Eco-Solvent terbaru. Hasil warna tajam, gradasi halus, warna hitam pekat, dan tidak pecah meskipun dilihat dari jarak dekat.</p>
                 </div>
-                <div class="feature-box">
-                    <i class="fas fa-tools" style="color: var(--primary); font-size: 2.5rem;"></i>
-                    <h4>Pemasangan Pro</h4>
-                    <p style="font-size: 0.9rem; color: #888;">Rapi, Detil & Bergaransi</p>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Laminasi Pelindung</h3>
+                    <p>Setiap decal dilapisi laminasi (Glossy/Doff/Super Gloss) untuk melindungi warna dari sinar UV matahari, air hujan, dan goresan ringan. Warna awet bertahun-tahun.</p>
                 </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <h3>Pemasangan Ahli</h3>
+                    <p>Tim installer kami bekerja dengan teknik wrapping detil. Bagian ujung dilipat rapi ke dalam body, tanpa sambungan kasar, dan bebas dari gelembung udara.</p>
+                </div>
+
             </div>
         </div>
     </section>
 
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">Layanan <span class="highlight">Dprographic</span></h2>
+            <h2 class="section-title">Layanan <span class="highlight">Kami</span></h2>
             <p class="section-subtitle">Solusi decal untuk semua kebutuhan kendaraan</p>
 
             <div class="services-grid">
@@ -354,7 +463,6 @@
                     <div class="swiper-slide swiper-slide-gallery"><img src="images/bus.webp" alt="Livery Bus Besar"><div class="slide-overlay"><h4>Big Bus Livery</h4><p>Grafis skala besar armada.</p></div></div>
                     <div class="swiper-slide swiper-slide-gallery"><img src="images/doble-cabin.webp" alt="Decal Double Cabin 4x4"><div class="slide-overlay"><h4>Double Cabin 4x4</h4><p>Tampilan tangguh offroad.</p></div></div>
                 </div>
-
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
