@@ -18,12 +18,12 @@
             --cyan: #00F0FF; 
             --pink: #FF0055; 
             --yellow: #FFE600; 
-            --green: #00FF99; /* Warna Baru: Hijau Neon */
-            --orange: #FF8800; /* Warna Baru: Orange Balap */
+            --green: #00FF99; 
+            --orange: #FF8800; 
             
-            /* Background Modern (Bukan Hitam Polos) */
+            /* Background Modern */
             --dark-bg: #0f1014;
-            --card-bg: rgba(255, 255, 255, 0.05); /* Transparan */
+            --card-bg: rgba(255, 255, 255, 0.05);
             --text-light: #ffffff;
             --text-gray: #b0b0b0;
         }
@@ -42,7 +42,7 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* Kelas Warna untuk Teks (Biar Meriah) */
+        /* Kelas Warna untuk Teks */
         .txt-cyan { color: var(--cyan); }
         .txt-pink { color: var(--pink); }
         .txt-yellow { color: var(--yellow); }
@@ -107,9 +107,14 @@
             width: 100%; height: 100%; position: relative;
             display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
+        
+        /* UPDATED: Hero Image CSS agar support Responsive Picture */
         .hero-bg-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; /* Penting agar gambar mengisi layar penuh */
+            z-index: 1;
         }
+
         .hero-overlay-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5); z-index: 2;
@@ -135,16 +140,13 @@
         }
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- WHY US (UPDATED: WARNA-WARNI & BACKGROUND MODERN) --- */
+        /* --- WHY US (MODERN & COLORFUL) --- */
         .why-us {
             padding: 100px 0;
-            /* Background Baru: Gradasi Biru Tua ke Ungu (Modern & Meriah) */
             background: radial-gradient(circle at top right, #1b2845 0%, #101014 100%);
             position: relative;
             border-top: 1px solid #333;
         }
-
-        /* Menambahkan efek pola titik-titik samar agar tidak polos */
         .why-us::before {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -153,32 +155,28 @@
             opacity: 0.2;
             pointer-events: none;
         }
-
         .why-us-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
-
         .feature-card {
-            background: rgba(255, 255, 255, 0.03); /* Lebih transparan */
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 40px 30px;
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
-            backdrop-filter: blur(10px); /* Efek Kaca */
+            backdrop-filter: blur(10px);
             border-radius: 15px;
         }
-
         .feature-card:hover {
             transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.08);
             border-color: var(--cyan);
             box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
         }
-
         .feature-icon-wrapper {
             width: 70px; height: 70px;
             background: rgba(0, 0, 0, 0.3);
@@ -188,22 +186,12 @@
             font-size: 2rem;
             transition: 0.4s;
         }
-
-        /* Warna Ikon Berbeda Tiap Kotak */
         .card-1 .feature-icon-wrapper i { color: var(--yellow); }
         .card-2 .feature-icon-wrapper i { color: var(--cyan); }
         .card-3 .feature-icon-wrapper i { color: var(--pink); }
         .card-4 .feature-icon-wrapper i { color: var(--green); }
-
-        .feature-card h3 {
-            font-size: 1.4rem; margin-bottom: 15px; color: white; font-weight: 700;
-        }
-
-        .feature-card p {
-            font-size: 0.95rem; color: #ccc; line-height: 1.7;
-        }
-        
-        /* Highlight text dalam paragraf biar tebal */
+        .feature-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: white; font-weight: 700; }
+        .feature-card p { font-size: 0.95rem; color: #ccc; line-height: 1.7; }
         .feature-card p span { font-weight: 600; }
 
         /* --- SERVICES --- */
@@ -287,8 +275,13 @@
 
     <section id="home" class="swiper hero-slider">
         <div class="swiper-wrapper">
+            
             <div class="swiper-slide hero-slide">
-                <img src="images/sedan-decal.webp" class="hero-bg-img" alt="Decal Mobil Sedan Sport">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/sedan-decal-11.webp">
+                    <img src="images/sedan-decal.webp" class="hero-bg-img" alt="Decal Mobil Sedan Sport">
+                </picture>
+
                 <div class="hero-overlay-layer"></div>
                 <div class="container hero-content">
                     <h1>Upgrade Tampilan Kendaraanmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
@@ -299,8 +292,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="swiper-slide hero-slide">
-                <img src="images/pickup-decal.webp" class="hero-bg-img" alt="Branding Mobil Pickup">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/pickup-decal-11.webp">
+                    <img src="images/pickup-decal.webp" class="hero-bg-img" alt="Branding Mobil Pickup">
+                </picture>
+
                 <div class="hero-overlay-layer"></div>
                 <div class="container hero-content">
                     <h1>Branding Mobil Operasional<br><span class="highlight-pink">Tingkatkan Citra</span> Bisnis Anda</h1>
@@ -310,8 +308,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="swiper-slide hero-slide">
-                <img src="images/decab-decal.webp" class="hero-bg-img" alt="Decal Double Cabin 4x4">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/decab-decal-11.webp">
+                    <img src="images/decab-decal.webp" class="hero-bg-img" alt="Decal Double Cabin 4x4">
+                </picture>
+
                 <div class="hero-overlay-layer"></div>
                 <div class="container hero-content">
                     <h1>Lindungi Cat Asli Mobil<br>Dengan <span class="highlight">Wrapping Premium</span></h1>
@@ -332,7 +335,6 @@
             <p class="section-subtitle">Kualitas & detail adalah prioritas utama kami</p>
 
             <div class="why-us-grid">
-                
                 <div class="feature-card card-1">
                     <div class="feature-icon-wrapper" style="border: 1px solid var(--yellow);">
                         <i class="fas fa-layer-group"></i>
@@ -364,7 +366,6 @@
                     <h3 class="txt-green">Pemasangan Ahli</h3>
                     <p>Teknik wrapping detil. Bagian ujung dilipat <span class="txt-green">rapi ke dalam body</span>, tanpa sambungan kasar, dan bebas dari gelembung udara.</p>
                 </div>
-
             </div>
         </div>
     </section>
