@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D-Pro Graphic | Jasa Decal & Sticker Mobil Premium</title>
+    <title>Dprographic | Spesialis Decal & Sticker Mobil Premium</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
@@ -26,6 +26,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -74,6 +78,7 @@
             top: 0;
             z-index: 1000;
             border-bottom: 2px solid var(--secondary);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -82,9 +87,22 @@
             align-items: center;
         }
 
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Jika logo gambar belum ada, styling text fallback */
+        .logo span { color: var(--primary); }
+
         .logo img {
-            height: 50px; /* Sesuaikan tinggi logo */
+            height: 50px; 
             width: auto;
+            margin-right: 10px;
         }
 
         .nav-links {
@@ -95,6 +113,8 @@
         .nav-links a {
             font-weight: 600;
             transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
         .nav-links a:hover { color: var(--primary); }
@@ -108,6 +128,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             border: none;
             cursor: pointer;
+            display: inline-block;
         }
 
         .btn-cta:hover {
@@ -122,7 +143,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/1600x900/?sportscar,racing') no-repeat center center/cover;
+            /* Background keren mobil sport */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1611016186353-9af29c778b14?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
             position: relative;
             padding-top: 80px;
         }
@@ -131,7 +153,7 @@
             font-size: 3.5rem;
             line-height: 1.2;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
         }
 
         .hero-content p {
@@ -190,13 +212,13 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 15px;
         }
 
         .gallery-item {
             position: relative;
-            height: 250px;
+            height: 300px;
             overflow: hidden;
             border-radius: 10px;
             cursor: pointer;
@@ -214,11 +236,14 @@
         .overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
             padding: 20px;
             transform: translateY(100%);
             transition: transform 0.3s;
         }
+        
+        .overlay h4 { color: var(--primary); font-size: 1.2rem; }
+        .overlay p { color: #ccc; font-size: 0.9rem; }
 
         .gallery-item:hover .overlay { transform: translateY(0); }
 
@@ -227,6 +252,8 @@
             padding: 80px 0;
             background: linear-gradient(135deg, #1a1c23 0%, #0f1014 100%);
             text-align: center;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
         }
         
         .features-wrapper {
@@ -236,24 +263,38 @@
             gap: 30px;
         }
         
-        .feature-box h4 { color: var(--primary); margin-top: 10px; }
+        .feature-box { flex: 1; min-width: 200px; }
+        .feature-box h4 { color: white; margin-top: 15px; font-weight: 600; font-size: 1.2rem; }
 
         /* --- FOOTER --- */
         footer {
             background-color: #000;
-            padding: 50px 0;
+            padding: 60px 0 30px;
             border-top: 2px solid var(--accent);
             text-align: center;
         }
 
+        .social-icons { margin: 30px 0; }
+
         .social-icons a {
-            font-size: 1.5rem;
-            margin: 0 15px;
-            color: var(--text-gray);
-            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #222;
+            margin: 0 10px;
+            color: white;
+            transition: all 0.3s;
+            font-size: 1.2rem;
         }
 
-        .social-icons a:hover { color: var(--primary); }
+        .social-icons a:hover { 
+            background: var(--primary); 
+            color: black;
+            transform: translateY(-5px);
+        }
 
         /* --- FLOATING WA --- */
         .float-wa {
@@ -272,13 +313,14 @@
             box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
             z-index: 2000;
             transition: transform 0.3s;
+            text-decoration: none;
         }
 
         .float-wa:hover { transform: scale(1.1); }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.2rem; }
+            .hero-content h1 { font-size: 2rem; }
             .nav-links { display: none; } /* Simplified for mobile */
             .logo img { height: 40px; }
         }
@@ -289,7 +331,8 @@
     <header>
         <div class="container nav-container">
             <div class="logo">
-                <img src="logo-dprographic.webp" alt="D-Pro Graphic Logo">
+                <img src="logo-dprographic.webp" alt="Dprographic" onerror="this.style.display='none'">
+                D<span>PRO</span>GRAPHIC
             </div>
             <nav class="nav-links">
                 <a href="#home">Home</a>
@@ -297,17 +340,17 @@
                 <a href="#gallery">Galeri</a>
                 <a href="#contact">Kontak</a>
             </nav>
-            <a href="https://wa.me/6281234567890" class="btn-cta">Pesan Sekarang</a>
+            <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20konsultasi%20decal%20mobil" class="btn-cta" target="_blank">Pesan Sekarang</a>
         </div>
     </header>
 
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h1>Ubah Tampilan Mobil Anda <br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
-            <p>Spesialis Decal Custom, Cutting Sticker, dan Wrapping Mobil dengan Kualitas Premium. Ekspresikan gayamu di jalanan!</p>
+            <h1>Upgrade Tampilan Mobilmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
+            <p>Spesialis Decal Custom, Cutting Sticker, dan Wrapping Mobil di Malang. Desain eksklusif, bahan premium, pemasangan rapi.</p>
             <div style="margin-top: 30px;">
-                <a href="#services" class="btn-cta" style="background: transparent; border: 2px solid var(--primary); margin-right: 10px;">Lihat Layanan</a>
-                <a href="https://wa.me/6281234567890" class="btn-cta">Konsultasi Gratis <i class="fas fa-arrow-right"></i></a>
+                <a href="#gallery" class="btn-cta" style="background: transparent; border: 2px solid var(--primary); margin-right: 10px;">Lihat Hasil Karya</a>
+                <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20tertarik%20dengan%20jasa%20decalnya" class="btn-cta" target="_blank">Konsultasi WA <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
@@ -316,17 +359,17 @@
         <div class="container">
             <div class="features-wrapper">
                 <div class="feature-box">
-                    <i class="fas fa-gem" style="color: var(--secondary); font-size: 2rem;"></i>
+                    <i class="fas fa-gem" style="color: var(--secondary); font-size: 2.5rem;"></i>
                     <h4>Bahan Premium</h4>
                     <p style="font-size: 0.9rem; color: #888;">Vinyl Grade A+ & Tahan Cuaca</p>
                 </div>
                 <div class="feature-box">
-                    <i class="fas fa-palette" style="color: var(--accent); font-size: 2rem;"></i>
+                    <i class="fas fa-palette" style="color: var(--accent); font-size: 2.5rem;"></i>
                     <h4>Desain Custom</h4>
                     <p style="font-size: 0.9rem; color: #888;">Revisi Sampai Cocok</p>
                 </div>
                 <div class="feature-box">
-                    <i class="fas fa-tools" style="color: var(--primary); font-size: 2rem;"></i>
+                    <i class="fas fa-tools" style="color: var(--primary); font-size: 2.5rem;"></i>
                     <h4>Pemasangan Pro</h4>
                     <p style="font-size: 0.9rem; color: #888;">Rapi, Detil & Bergaransi</p>
                 </div>
@@ -336,19 +379,19 @@
 
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">Layanan <span class="highlight">Kami</span></h2>
-            <p class="section-subtitle">Solusi lengkap untuk estetika kendaraan Anda</p>
+            <h2 class="section-title">Layanan <span class="highlight">Dprographic</span></h2>
+            <p class="section-subtitle">Apapun gayamu, kami siap mewujudkannya</p>
 
             <div class="services-grid">
                 <div class="service-card">
                     <div class="icon-box"><i class="fas fa-car-side"></i></div>
                     <h3>Full Body Wrapping</h3>
-                    <p>Ubah warna total mobil Anda tanpa merusak cat asli. Tersedia warna matte, gloss, satin, hingga chrome.</p>
+                    <p>Ubah warna total mobil Anda tanpa merusak cat asli. Tersedia warna matte, gloss, satin, hingga chrome mewah.</p>
                 </div>
                 <div class="service-card">
                     <div class="icon-box"><i class="fas fa-paint-brush"></i></div>
                     <h3>Custom Decal Printing</h3>
-                    <p>Desain grafis rumit bergaya racing, itasha, atau livery balap dicetak dengan resolusi tinggi.</p>
+                    <p>Desain grafis racing, itasha, atau branding kantor. Dicetak High-Res dengan laminasi anti pudar.</p>
                 </div>
                 <div class="service-card">
                     <div class="icon-box"><i class="fas fa-cut"></i></div>
@@ -361,49 +404,69 @@
 
     <section id="gallery" class="gallery">
         <div class="container">
-            <h2 class="section-title">Hasil <span class="highlight-pink">Karya</span></h2>
-            <p class="section-subtitle">Portofolio pemasangan terbaru kami</p>
+            <h2 class="section-title">Galeri <span class="highlight-pink">Inspirasi</span></h2>
+            <p class="section-subtitle">Contoh gaya decal yang bisa kami kerjakan</p>
 
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://source.unsplash.com/600x400/?racing car" alt="Decal Racing">
-                    <div class="overlay"><h4>Racing Style</h4></div>
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" alt="Racing Decal">
+                    <div class="overlay">
+                        <h4>Racing Style</h4>
+                        <p>Tampilan sport agresif</p>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://source.unsplash.com/600x400/?car wrap" alt="Car Wrap Matte">
-                    <div class="overlay"><h4>Full Wrap Matte Black</h4></div>
+                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800" alt="Car Wrap Matte">
+                    <div class="overlay">
+                        <h4>Matte Full Wrap</h4>
+                        <p>Elegan dan Misterius</p>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://source.unsplash.com/600x400/?supercar" alt="Sporty Decal">
-                    <div class="overlay"><h4>Sporty Striping</h4></div>
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=800" alt="Sporty Decal">
+                    <div class="overlay">
+                        <h4>Custom Livery</h4>
+                        <p>Desain Kompleks & Detail</p>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://source.unsplash.com/600x400/?drift car" alt="Drift Livery">
-                    <div class="overlay"><h4>Drift Livery</h4></div>
+                    <img src="https://images.unsplash.com/photo-1600712242685-6216954037a0?auto=format&fit=crop&q=80&w=800" alt="Drift Livery">
+                    <div class="overlay">
+                        <h4>JDM / Drift Style</h4>
+                        <p>Penuh warna dan berani</p>
+                    </div>
                 </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="margin-bottom: 20px; color: #888;">Ingin lihat hasil kerja Dprographic lainnya?</p>
+                <a href="https://wa.me/6281333317288?text=Boleh%20lihat%20portofolio%20decal%20asli%20Dprographic?" class="btn-cta" style="font-size: 0.9rem;">Minta Foto Portofolio Asli via WA</a>
             </div>
         </div>
     </section>
 
     <footer id="contact">
         <div class="container">
-            <div class="logo" style="margin-bottom: 20px;">
-                <img src="logo-dprographic.webp" alt="D-Pro Graphic" style="height: 60px;">
-            </div>
-            <h3 style="margin-bottom: 20px;">Siap Mengubah Tampilan Mobil Anda?</h3>
-            <p style="color: #888; margin-bottom: 30px;">Kunjungi workshop kami atau konsultasi online sekarang.</p>
+            <h2 style="margin-bottom: 10px; color: white;">DPROGRAPHIC</h2>
+            <p style="color: var(--primary); letter-spacing: 3px; font-weight: bold; margin-bottom: 30px;">THE ART OF STICKER</p>
             
+            <div class="contact-info" style="margin-bottom: 30px;">
+                <p><i class="fas fa-phone-alt highlight"></i> 0813-3331-7288</p>
+                <p><i class="fas fa-map-marker-alt highlight"></i> Malang, Jawa Timur</p>
+            </div>
+
             <div class="social-icons">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/6281333317288"><i class="fab fa-whatsapp"></i></a>
             </div>
             
-            <p style="margin-top: 50px; font-size: 0.8rem; color: #555;">&copy; 2023 D-Pro Graphic. All Rights Reserved.</p>
+            <p style="margin-top: 50px; font-size: 0.8rem; color: #555;">&copy; 2023 Dprographic. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/6281234567890" class="float-wa" target="_blank">
+    <a href="https://wa.me/6281333317288?text=Halo%20Dprographic,%20saya%20mau%20tanya%20harga%20decal" class="float-wa" target="_blank" title="Hubungi Kami di WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
