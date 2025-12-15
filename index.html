@@ -14,7 +14,7 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            /* Palet Warna Sticker (Lebih Beragam) */
+            /* Palet Warna Sticker */
             --cyan: #00F0FF; 
             --pink: #FF0055; 
             --yellow: #FFE600; 
@@ -107,14 +107,10 @@
             width: 100%; height: 100%; position: relative;
             display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
-        
-        /* UPDATED: Hero Image CSS agar support Responsive Picture */
         .hero-bg-img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            object-fit: cover; /* Penting agar gambar mengisi layar penuh */
-            z-index: 1;
+            object-fit: cover; z-index: 1;
         }
-
         .hero-overlay-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5); z-index: 2;
@@ -140,7 +136,7 @@
         }
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- WHY US (MODERN & COLORFUL) --- */
+        /* --- WHY US --- */
         .why-us {
             padding: 100px 0;
             background: radial-gradient(circle at top right, #1b2845 0%, #101014 100%);
@@ -229,14 +225,95 @@
         .swiper-pagination-bullet { background: var(--text-gray); opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--pink) !important; opacity: 1; }
 
-        /* --- FOOTER --- */
-        footer { background-color: #000; padding: 60px 0 30px; border-top: 2px solid var(--yellow); text-align: center; }
-        .social-icons { margin: 30px 0; }
-        .social-icons a {
-            display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px;
-            border-radius: 50%; background: #222; margin: 0 10px; color: white; transition: all 0.3s; font-size: 1.2rem;
+        /* --- FOOTER (NEW 3 COLUMN STYLE) --- */
+        footer {
+            background-color: #08090b;
+            padding: 80px 0 20px;
+            border-top: 3px solid var(--cyan);
+            color: #ddd;
         }
-        .social-icons a:hover { background: var(--cyan); color: black; transform: translateY(-5px); }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+            text-align: left; /* Rata kiri agar rapi */
+        }
+
+        /* Kolom 1: Brand */
+        .footer-brand .logo {
+            justify-content: flex-start; /* Logo rata kiri */
+            margin-bottom: 20px;
+        }
+        .footer-brand p {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Kolom 2: Kontak */
+        .footer-title {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 50px; height: 3px;
+            background: var(--pink);
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        .contact-list i {
+            color: var(--cyan);
+            margin-right: 15px;
+            margin-top: 5px; /* Alignment dengan teks */
+            font-size: 1.1rem;
+        }
+
+        /* Kolom 3: Sosmed */
+        .social-links-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-links-footer a {
+            width: 45px; height: 45px;
+            background: #222;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            border: 1px solid #333;
+        }
+        .social-links-footer a:hover {
+            background: var(--cyan);
+            color: black;
+            transform: translateY(-5px);
+        }
+
+        .quick-links li { margin-bottom: 10px; }
+        .quick-links a:hover { color: var(--cyan); margin-left: 5px; transition: 0.3s; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #222;
+            font-size: 0.85rem;
+            color: #666;
+        }
 
         /* --- FLOATING WA --- */
         .float-wa {
@@ -252,6 +329,12 @@
             .nav-links { display: none; }
             .logo img { height: 40px; }
             .swiper-slide-gallery { height: 300px; }
+            /* Footer Responsive */
+            .footer-grid { text-align: center; }
+            .footer-brand .logo { justify-content: center; }
+            .footer-title::after { left: 50%; transform: translateX(-50%); }
+            .contact-list li { justify-content: center; text-align: center; }
+            .social-links-footer { justify-content: center; }
         }
     </style>
 </head>
@@ -275,13 +358,11 @@
 
     <section id="home" class="swiper hero-slider">
         <div class="swiper-wrapper">
-            
             <div class="swiper-slide hero-slide">
                 <picture>
                     <source media="(max-width: 768px)" srcset="images/sedan-decal-11.webp">
                     <img src="images/sedan-decal.webp" class="hero-bg-img" alt="Decal Mobil Sedan Sport">
                 </picture>
-
                 <div class="hero-overlay-layer"></div>
                 <div class="container hero-content">
                     <h1>Upgrade Tampilan Kendaraanmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
@@ -292,13 +373,11 @@
                     </div>
                 </div>
             </div>
-
             <div class="swiper-slide hero-slide">
                 <picture>
                     <source media="(max-width: 768px)" srcset="images/pickup-decal-11.webp">
                     <img src="images/pickup-decal.webp" class="hero-bg-img" alt="Branding Mobil Pickup">
                 </picture>
-
                 <div class="hero-overlay-layer"></div>
                 <div class="container hero-content">
                     <h1>Branding Mobil Operasional<br><span class="highlight-pink">Tingkatkan Citra</span> Bisnis Anda</h1>
@@ -308,13 +387,11 @@
                     </div>
                 </div>
             </div>
-
             <div class="swiper-slide hero-slide">
                 <picture>
                     <source media="(max-width: 768px)" srcset="images/decab-decal-11.webp">
                     <img src="images/decab-decal.webp" class="hero-bg-img" alt="Decal Double Cabin 4x4">
                 </picture>
-
                 <div class="hero-overlay-layer"></div>
                 <div class="container hero-content">
                     <h1>Lindungi Cat Asli Mobil<br>Dengan <span class="highlight">Wrapping Premium</span></h1>
@@ -336,33 +413,22 @@
 
             <div class="why-us-grid">
                 <div class="feature-card card-1">
-                    <div class="feature-icon-wrapper" style="border: 1px solid var(--yellow);">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
+                    <div class="feature-icon-wrapper" style="border: 1px solid var(--yellow);"><i class="fas fa-layer-group"></i></div>
                     <h3 class="txt-yellow">Material Premium</h3>
                     <p>Kami hanya menggunakan vinyl <span class="txt-yellow">Automotive Grade</span> (seperti Orajet, Maxdecal, 3M) yang memiliki daya rekat kuat namun aman bagi cat asli saat dilepas.</p>
                 </div>
-
                 <div class="feature-card card-2">
-                    <div class="feature-icon-wrapper" style="border: 1px solid var(--cyan);">
-                        <i class="fas fa-print"></i>
-                    </div>
+                    <div class="feature-icon-wrapper" style="border: 1px solid var(--cyan);"><i class="fas fa-print"></i></div>
                     <h3 class="txt-cyan">Cetak High-Res</h3>
                     <p>Didukung mesin cetak <span class="txt-cyan">Eco-Solvent</span> terbaru. Hasil warna tajam, gradasi halus, warna hitam pekat, dan tidak pecah dilihat dari dekat.</p>
                 </div>
-
                 <div class="feature-card card-3">
-                    <div class="feature-icon-wrapper" style="border: 1px solid var(--pink);">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                    <div class="feature-icon-wrapper" style="border: 1px solid var(--pink);"><i class="fas fa-shield-alt"></i></div>
                     <h3 class="txt-pink">Laminasi Pelindung</h3>
                     <p>Setiap decal dilapisi laminasi <span class="txt-pink">Glossy/Doff/Super Gloss</span> untuk melindungi warna dari sinar UV matahari, air hujan, dan goresan ringan.</p>
                 </div>
-
                 <div class="feature-card card-4">
-                    <div class="feature-icon-wrapper" style="border: 1px solid var(--green);">
-                        <i class="fas fa-user-astronaut"></i>
-                    </div>
+                    <div class="feature-icon-wrapper" style="border: 1px solid var(--green);"><i class="fas fa-user-astronaut"></i></div>
                     <h3 class="txt-green">Pemasangan Ahli</h3>
                     <p>Teknik wrapping detil. Bagian ujung dilipat <span class="txt-green">rapi ke dalam body</span>, tanpa sambungan kasar, dan bebas dari gelembung udara.</p>
                 </div>
@@ -424,22 +490,53 @@
 
     <footer id="contact">
         <div class="container">
-            <h2 style="margin-bottom: 10px; color: white;">DPROGRAPHIC</h2>
-            <p style="color: var(--cyan); letter-spacing: 3px; font-weight: bold; margin-bottom: 30px;">THE ART OF STICKER</p>
-            
-            <div class="contact-info" style="margin-bottom: 30px;">
-                <p><i class="fas fa-phone-alt highlight"></i> 0813-3331-7288</p>
-                <p><i class="fas fa-map-marker-alt highlight"></i> Malang, Jawa Timur</p>
+            <div class="footer-grid">
+                
+                <div class="footer-col footer-brand">
+                    <div class="logo">
+                        <img src="images/logo-dprographic.webp" alt="Dprographic" onerror="this.style.display='none'">
+                        D<span>PRO</span>GRAPHIC
+                    </div>
+                    <p>
+                        Spesialis jasa Decal, Cutting Sticker, dan Wrapping Mobil Premium di Kota Batu & Malang. 
+                        Kami berkomitmen memberikan hasil terbaik dengan bahan berkualitas untuk kepuasan tampilan kendaraan Anda.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontak Kami</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jl. Raya Sumbergondo, Sumbergondo, Kec. Bumiaji, Kota Batu, Jawa Timur 65335</span>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <span>0813-3331-7288</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Ikuti Kami</h3>
+                    <ul class="quick-links">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#services">Layanan</a></li>
+                        <li><a href="#gallery">Galeri Foto</a></li>
+                    </ul>
+                    <div class="social-links-footer">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/6281333317288"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/6281333317288"><i class="fab fa-whatsapp"></i></a>
+            <div class="copyright">
+                <p>&copy; 2023 Dprographic. All Rights Reserved. | The Art of Sticker</p>
             </div>
-            
-            <p style="margin-top: 50px; font-size: 0.8rem; color: #555;">&copy; 2023 Dprographic. All Rights Reserved.</p>
         </div>
     </footer>
 
