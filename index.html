@@ -43,7 +43,7 @@
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
-            z-index: 2;
+            z-index: 5; /* Z-index tinggi agar konten di atas gambar */
         }
         
         .section-title {
@@ -89,38 +89,47 @@
         }
         .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); }
 
-        /* --- HERO SLIDESHOW SECTION --- */
+        /* --- HERO SLIDESHOW SECTION (Metode Baru) --- */
         .hero-slider {
             width: 100%;
-            height: 100vh; /* Layar penuh */
+            height: 100vh;
         }
 
         .hero-slide {
             width: 100%;
             height: 100%;
-            /* Kunci agar gambar background muncul dan proporsional */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
-        /* Overlay Gelap di setiap slide agar teks terbaca */
-        .hero-slide::before {
-            content: '';
+        /* Gambar Background Hero */
+        .hero-bg-img {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); /* Kegelapan overlay dikurangi sedikit agar gambar lebih jelas */
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Agar gambar memenuhi layar tanpa gepeng */
             z-index: 1;
         }
 
+        /* Lapisan Gelap (Overlay) di atas Gambar */
+        .hero-overlay-layer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Warna hitam transparan 60% */
+            z-index: 2;
+        }
+
+        /* Konten Text Hero */
         .hero-content {
             text-align: center;
             position: relative;
-            z-index: 2;
+            z-index: 3; /* Paling atas */
             padding-top: 60px;
         }
 
@@ -237,8 +246,9 @@
     <section id="home" class="swiper hero-slider">
         <div class="swiper-wrapper">
             
-            <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1611016186353-9af29c778b14?auto=format&fit=crop&q=80&w=1920');">
-                <div class="container hero-content">
+            <div class="swiper-slide hero-slide">
+                <img src="https://images.unsplash.com/photo-1611016186353-9af29c778b14?auto=format&fit=crop&q=80&w=1920" class="hero-bg-img" alt="Background Sport Car">
+                <div class="hero-overlay-layer"></div> <div class="container hero-content">
                     <h1>Upgrade Tampilan Kendaraanmu<br><span class="highlight">Lebih Modern</span> & <span class="highlight-pink">Berkarakter</span></h1>
                     <p>Spesialis Decal Custom, Cutting Sticker, dan Wrapping di Malang. Jadikan mobilmu pusat perhatian di jalanan!</p>
                     <div class="hero-btn-wrapper">
@@ -248,7 +258,10 @@
                 </div>
             </div>
 
-            <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1586043797923-3c0930564843?auto=format&fit=crop&q=80&w=1920');">
+            <div class="swiper-slide hero-slide">
+                <img src="https://images.unsplash.com/photo-1586043797923-3c0930564843?auto=format&fit=crop&q=80&w=1920" class="hero-bg-img" alt="Background Mobil Box">
+                <div class="hero-overlay-layer"></div>
+
                 <div class="container hero-content">
                     <h1>Branding Mobil Operasional<br><span class="highlight-pink">Tingkatkan Citra</span> Bisnis Anda</h1>
                     <p>Ubah kendaraan niaga menjadi media promosi berjalan yang efektif. Desain profesional untuk Grandmax, Elf, hingga Truk.</p>
@@ -258,7 +271,10 @@
                 </div>
             </div>
 
-            <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1920');">
+            <div class="swiper-slide hero-slide">
+                <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1920" class="hero-bg-img" alt="Background Wrapping">
+                <div class="hero-overlay-layer"></div>
+
                 <div class="container hero-content">
                     <h1>Lindungi Cat Asli Mobil<br>Dengan <span class="highlight">Wrapping Premium</span></h1>
                     <p>Jaga nilai jual kembali mobil Anda. Tahan goresan, anti jamur, dan warna yang lebih solid dan mewah.</p>
@@ -376,17 +392,17 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // 1. PENGATURAN HERO SLIDER (FASTER FADE & FIX GHOSTING)
+        // 1. PENGATURAN HERO SLIDER (PERBAIKAN FADE & IMAGE)
         var heroSwiper = new Swiper(".hero-slider", {
             spaceBetween: 0,
-            effect: "fade", // Efek pudar
-            speed: 1000, // Kecepatan 1 detik (lebih cepat dari default)
+            effect: "fade", 
+            speed: 1000, 
             fadeEffect: {
-                crossFade: true // PENTING: Agar slide lama langsung tertutup slide baru
+                crossFade: true // Slide lama langsung hilang tertutup slide baru
             },
             loop: true,
             autoplay: {
-                delay: 5000, // Waktu tunggu 5 detik
+                delay: 5000, 
                 disableOnInteraction: false,
             },
             navigation: {
@@ -395,7 +411,7 @@
             },
         });
 
-        // 2. PENGATURAN GALLERY SLIDER (CAROUSEL)
+        // 2. PENGATURAN GALLERY SLIDER
         var gallerySwiper = new Swiper(".gallery-slider", {
             slidesPerView: 1,
             spaceBetween: 20,
